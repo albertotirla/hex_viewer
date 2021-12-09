@@ -41,9 +41,17 @@ namespace hex_viewer
             while ((current_byte = input.ReadByte()) != -1)
             {
                 //if we still have bytes in the file, increment the counter, append the ascii and hex formatted version of the byte to their corresponding buffers.
+                char letter = (char)current_byte;
                 counter++;
-                ascii_text.Append((char)current_byte);
-                hex_bytes.Append(String.Format("0x{0:X2} ", current_byte));
+                if (char.IsControl(letter))
+                {
+                    ascii_text.Append(".");
+                }
+                else
+                {
+                    ascii_text.Append(letter);
+                }
+                hex_bytes.Append(String.Format("{0:X2} ", current_byte));
                 //did we already read number of bytes per line?
                 if (counter % number_of_bytes_per_line == 0)
                 {
@@ -67,7 +75,7 @@ namespace hex_viewer
             //make a new line, to not write over the previous row
             Console.WriteLine();
             //write the fields, with separators
-            Console.Write("0x{0:X}", offset);
+            Console.Write("{0:X}", offset);
             Console.Write(" | ");
             Console.Write(hex.ToString());
             Console.Write("|");
