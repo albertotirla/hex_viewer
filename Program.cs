@@ -21,6 +21,12 @@ namespace hex_viewer
             //If we arrived to this point, command line arguments are what we expect. In that case, populate the variables for user input with them
             String file_name = args[0];
             int number_of_bytes_per_line = int.Parse(args[1]);
+            //check if the number of bytes per line is less than 0, if so exit
+            if (number_of_bytes_per_line <= 0)
+            {
+                Console.WriteLine("Fatal: can't display a negative amount of bytes per line.\nexitting...");
+                Environment.Exit(-1);
+            }
             //declare other variables
             int current_byte;
             int counter = 0;
