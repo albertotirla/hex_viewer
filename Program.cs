@@ -1,15 +1,21 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-
+using System.Diagnostics;
 namespace hex_viewer
 {
     class Program
     {
         static void Main(string[] args)
         {
-            String file_name = "./main.rs";
-            int number_of_bytes_per_line = 10;
+            if (args.Length < 2)
+            {
+                Console.WriteLine($"usage:{Process.GetCurrentProcess().ProcessName} < path > < bytes per line>\narguments:\n*path: a path on the filesystem where the file can be read from\n*bytes per line: the maximum length of a displayed line\n\tFatal: not enough arguments provided, shutting down");
+            Environment.Exit(-1);
+            }
+            String file_name = args[0];
+            int number_of_bytes_per_line = int.Parse(args[1]);
+
             int current_byte;
             int counter = 0;
             int offset = 0;
