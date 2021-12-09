@@ -27,7 +27,7 @@ namespace hex_viewer
             int offset = 0;
             StringBuilder ascii_text = new StringBuilder();
             StringBuilder hex_bytes = new StringBuilder();
-            //initialise a file stream to read the content of the file given as path. Exceptions are not handled for now
+            //initialise a file stream to read the content of the file given as path. Exceptions are not handled for now, planned for future versions
             using var input = new FileStream(file_name, FileMode.Open);
             //print the header of the table, three columns, offset, hex bytes, ascii representation
             Console.WriteLine("offset | bytes | ascii");
